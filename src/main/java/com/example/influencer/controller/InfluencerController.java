@@ -12,11 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class InfluencerController {
     private final InfluencerService influencerService;
-    private final InfluencerMapper influencerMapper;
 
-    public InfluencerController(InfluencerService influencerService, InfluencerMapper influencerMapper) {
+    public InfluencerController(InfluencerService influencerService) {
         this.influencerService = influencerService;
-        this.influencerMapper = influencerMapper;
     }
 
     @PostMapping("/create")
@@ -24,5 +22,5 @@ public class InfluencerController {
         return influencerService.create(influencer);
     }
 
-    }
+}
 

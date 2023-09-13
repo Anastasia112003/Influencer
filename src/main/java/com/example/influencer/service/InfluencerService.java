@@ -12,8 +12,6 @@ import org.springframework.stereotype.Service;
 public class InfluencerService {
     private final KafkaTemplate<String, Object> kafkaTemplate;
     private final InfluencerMapper influencerMapper;
-
-
     private final InfluencerRepository postRepository;
 
     public InfluencerService(KafkaTemplate<String, Object> kafkaTemplate, InfluencerMapper influencerMapper, InfluencerRepository postRepository) {
@@ -23,8 +21,8 @@ public class InfluencerService {
     }
 
     public InfluencerDTO create(Influencer influencer) {
-       Influencer savedInfluencer=postRepository.save(influencer);
-        InfluencerDTO influencerDTO=influencerMapper.toDto(savedInfluencer);
+        Influencer savedInfluencer = postRepository.save(influencer);
+        InfluencerDTO influencerDTO = influencerMapper.toDto(savedInfluencer);
         kafkaTemplate.send("influencer", influencerDTO);
         return influencerDTO;
 
